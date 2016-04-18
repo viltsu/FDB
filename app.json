@@ -1,0 +1,13 @@
+{
+  "name": "FDB",
+  "description": "Family dashboard",
+  "keywords": [
+    "family",
+    "dashboard"
+  ],
+  "repository": "https://github.com/viltsu/FDB",
+  "env": {
+    "PRODUCTION": "true",
+    "NPM_CONFIG_PRODUCTION": "false"
+  }
+}
