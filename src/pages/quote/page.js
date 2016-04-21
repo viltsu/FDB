@@ -6,16 +6,7 @@ import styles from "./style.css";
 import { fetchQuotes } from "./action";
 
 export class QuotePage extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      img: '',
-      quote: '',
-      by: ''
-    }
-  }
-
+  
   componentWillUnmount() {
     this.props.actions.fetchQuotes();
   }

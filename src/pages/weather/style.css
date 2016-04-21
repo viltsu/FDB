@@ -1,8 +1,19 @@
 .content {
   margin-top: 20px;
 }
+.columnLeft {
+  float: left;
+  width: 50%;
+}
+.columnLeft img {
+  width: 100%;
+}
 
-.welcomeText {
-  font-size: 20px;
-  color: #7F7F7F;
+.columnRight {
+  float: left;
+  width: 50%;
+  padding-left: 14px;
+}
+.active {
+  color: #ff0000;
 }
