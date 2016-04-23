@@ -1,9 +1,10 @@
 import fetch from 'isomorphic-fetch'
+import {QUOTE_URL} from '../../../settings.local.js';
 
 export const FETCH_QUOTE = 'FETCH_QUOTE';
 export const RECEIVE_QUOTE = 'RECEIVE_QUOTE';
 
-const URL = 'http://localhost:3000/api/Quotes';
+
 
 function requestQuote() {
   return {
@@ -23,7 +24,7 @@ export function fetchQuotes() {
   return function (dispatch) {
     dispatch(requestQuote());
 
-    return fetch(URL + '/' + (Math.floor(Math.random() * 2) + 1))
+    return fetch(QUOTE_URL + '/random')
       .then((response) => response.json())
       .then((responseData) => {
         dispatch(receiveQuote(responseData));

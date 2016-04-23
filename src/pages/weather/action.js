@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import {FORECAST_URL, RAIN_MAP_URL} from '../../../settings.js';
+import {FORECAST_URL, RAIN_MAP_URL} from '../../../settings.local.js';
 
 export const FETCH_MAPS = 'FETCH_MAPS';
 export const RECEIVE_MAPS = 'RECEIVE_MAPS';
