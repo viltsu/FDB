@@ -1,11 +1,11 @@
 import fetch from 'isomorphic-fetch'
+import {FORECAST_URL, RAIN_MAP_URL} from '../../../settings.js';
 
 export const FETCH_MAPS = 'FETCH_MAPS';
 export const RECEIVE_MAPS = 'RECEIVE_MAPS';
+export const RECEIVE_FORECAST = 'RECEIVE_FORECAST';
 export const NEXT_MAP = 'NEXT_MAP';
 export const GET_MAP = 'GET_MAP';
-
-const WEATHER_URL = 'http://localhost:3000/api/RainMaps';
 
 function fetchMaps() {
   return {
@@ -20,12 +20,25 @@ function receiveMaps(data) {
   }
 }
 
+function receiveForecast(data) {
+  return {
+    type: RECEIVE_FORECAST,
+    forecast: data
+  }
+}
+
 export function refreshMaps() {
   
   return function (dispatch) {
     dispatch(fetchMaps());
 
-    return fetch(WEATHER_URL)
+    fetch(FORECAST_URL)
+      .then((response) => response.json())
+      .then((responseData) => {
+        dispatch(receiveForecast(responseData));
+      });
+
+    return fetch(RAIN_MAP_URL)
       .then((response) => response.json())
       .then((responseData) => {
         dispatch(receiveMaps(responseData));

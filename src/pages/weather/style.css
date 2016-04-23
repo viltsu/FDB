@@ -17,3 +17,23 @@
 .active {
   color: #ff0000;
 }
+
+.forecastList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.forecastList li {
+  height: 40px;
+}
+
+.date, .time {
+  font-size: x-small;
+}
+
+.icon {
+  margin-top: 3px;
+  float: left;
+  width: 40px;
+}

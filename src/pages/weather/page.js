@@ -6,37 +6,43 @@ import styles from "./style.css";
 
 import { refreshMaps, getMap, nextMap } from "./action";
 
-var timer;
+var timer = null;
 var adding = false;
 
 export class WeatherPage extends React.Component {
   componentDidMount() {
     this.props.actions.refreshMaps();
-    timer = setInterval(() => {
-      this.props.actions.nextMap();
-    }, 500);
+    if (timer === null) {
+      timer = setInterval(() => {
+        this.props.actions.nextMap();
+      }, 500);
+    }
   }
 
   componentWillUnmount() {
     clearInterval(timer);
+    timer = null;
   }
 
   select(idx) {
     this.props.actions.getMap(idx);
     clearInterval(timer);
+    timer = null;
     if (!adding) {
       adding = true;
       setTimeout(() => {
         adding = false;
-        timer = setInterval(() => {
-          this.props.actions.nextMap();
-        }, 500);
+        if (timer === null) {
+          timer = setInterval(() => {
+            this.props.actions.nextMap();
+          }, 500);
+        }
       }, 2000)
     }
   }
 
   render() {
-    const {maps, active} = this.props.weather;
+    const {maps, active, forecast} = this.props.weather;
     return (
       <div className={styles.content}>
         {(active > -1) ? (
@@ -48,7 +54,34 @@ export class WeatherPage extends React.Component {
           </div>
         ) : null
         }
-        <div className={styles.columnRight}>Forecast</div>
+        <div className={styles.columnRight}>
+          {(forecast) ? (
+            <ul className={styles.forecastList}>
+              {forecast.slice(0,10).map(function(data, idx) {
+                var parts = data.dt_txt.split(' ');
+                var date = parts[0].split('-');
+                var time = parts[1].split(':');
+                var suffix = '-n';
+                if(time[0] > 9 && time[0] < 21) {
+                  suffix = '-d';
+                }
+                var iconClass = "owf owf-2x owf-" + data.weather[0].id + suffix;
+                return <li key={idx}>
+                  <div className={styles.icon}>
+                    <i className={iconClass}></i>
+                  </div>
+                  <span className={styles.date}>{date[2]}.{date[1]}</span>
+                  .&nbsp;
+                  <span className={styles.time}>{time[0]}:{time[1]}</span>
+                  <br />
+                  {data.main.temp}&#8451;&nbsp;
+                  {data.weather[0].description}
+                </li>;
+              }.bind(this))}
+            </ul>
+          ) : null
+          }
+        </div>
       </div>
     );
   }

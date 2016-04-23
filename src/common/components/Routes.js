@@ -12,7 +12,7 @@ const routes = [
   '/quote',
   '/weather'
 ];
-/*
+
 var idx = 0;
 var changer = setInterval(function() {
   idx++;
@@ -20,9 +20,8 @@ var changer = setInterval(function() {
     idx = 0;
   }
   browserHistory.push(routes[idx]);
-  window.clearInterval(changer);
 }, 10000);
-*/
+
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={CalendarPage} />

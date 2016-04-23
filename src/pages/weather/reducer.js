@@ -1,6 +1,7 @@
 import {
   FETCH_MAPS,
   RECEIVE_MAPS,
+  RECEIVE_FORECAST,
   NEXT_MAP,
   GET_MAP
 } from './action'
@@ -13,15 +14,22 @@ const initState = {
 
 export function weather(state = initState, action) {
   switch (action.type) {
+    case RECEIVE_FORECAST: {
+      return Object.assign({}, state, {
+        forecast: action.forecast
+      })
+    }
     case RECEIVE_MAPS: {
-      return {
+      return Object.assign({}, state, {
         maps: action.maps,
         active: 0,
         loading: false
-      }
+      });
     }
     case FETCH_MAPS: {
-      return Object.assign({}, state, {loading: true})
+      return Object.assign({}, state, {
+        loading: true
+      })
     }
     case NEXT_MAP: {
       if (state.active < 0) {
