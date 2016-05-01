@@ -6,10 +6,19 @@ import { connect } from 'react-redux'
 import styles from "./style.css";
 import { fetchTrains } from "./action";
 
+var updater = null;
+
 export class TransportationPage extends React.Component {
 
   componentDidMount() {
     this.props.actions.fetchTrains();
+    updater = setInterval(() => {
+      this.props.actions.fetchTrains();
+    }, 10000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(updater);
   }
 
   render() {
@@ -17,22 +26,25 @@ export class TransportationPage extends React.Component {
     return (
       <div className={styles.content}>
         <table>
-          <tr>
-            <th>line</th>
-            <th>arriving</th>
-            <th>last stop</th>
-            <th>destination</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>Line</th>
+              <th>Track</th>
+              <th>Arriving</th>
+              <th>Last stop</th>
+              <th>Destination</th>
+            </tr>
+          </thead>
           <tbody>
             {trains.slice(0,10).map(function(data, idx) {
               return <tr key={idx}>
                 <td>{data.line}</td>
+                <td>{data.track}</td>
                 <td className={data.late > 0 ? styles.late: ''}>
                   {data.cancelled ? 'cancelled!' : ''}&nbsp;
                   {
                   data.late > 0 ?
-                    moment(data.arrival).locale('fi').format('LT') + ' -> ' +
-                    moment(data.estimate).locale('fi').format('LT') :
+                    moment(data.arrival).locale('fi').format('LT') + ' -> ' + moment(data.estimate).locale('fi').format('LT') :
                     moment(data.arrival).locale('fi').format('LT')
                   }
                 </td>
