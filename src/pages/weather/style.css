@@ -37,3 +37,11 @@
   float: left;
   width: 40px;
 }
+
+.hour-00 {
+  border-bottom: 1px solid #7a1316;
+}
+
+.hour-09, .hour-12, .hour-15 {
+  background-color: #141414;
+}

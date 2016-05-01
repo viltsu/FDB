@@ -6,13 +6,16 @@ import App from './App';
 import CalendarPage from '../../pages/calendar/page';
 import QuotePage from '../../pages/quote/page';
 import WeatherPage from '../../pages/weather/page';
+import TransportationPage from '../../pages/transportation/page';
 
 const routes = [
-  '/',
+  '/calendar',
   '/quote',
-  '/weather'
+  '/weather',
+  '/transportation'
 ];
 
+/*
 var idx = 0;
 var changer = setInterval(function() {
   idx++;
@@ -21,11 +24,14 @@ var changer = setInterval(function() {
   }
   browserHistory.push(routes[idx]);
 }, 10000);
+*/
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={CalendarPage} />
+    <IndexRoute component={WeatherPage} />
+    <Route path="calendar" component={CalendarPage} />
     <Route path="quote" component={QuotePage} />
     <Route path="weather" component={WeatherPage} />
+    <Route path="transportation" component={TransportationPage} />
   </Route>
 );

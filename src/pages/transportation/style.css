@@ -1,0 +1,21 @@
+.lastTime {
+  font-size: x-small;
+}
+
+.late {
+  color: #b82a30;
+}
+
+table {
+  border:0;
+  border-collapse:collapse;
+}
+
+tr, td {
+  padding: 4px;
+  margin: 0;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #292929;
+}

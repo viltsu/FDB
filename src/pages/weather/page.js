@@ -62,11 +62,13 @@ export class WeatherPage extends React.Component {
                 var date = parts[0].split('-');
                 var time = parts[1].split(':');
                 var suffix = '-n';
-                if(time[0] > 9 && time[0] < 21) {
+                var hourStyle = 'hour-' + time[0];
+                if(time[0] >= 9 && time[0] < 21) {
                   suffix = '-d';
                 }
                 var iconClass = "owf owf-2x owf-" + data.weather[0].id + suffix;
-                return <li key={idx}>
+                var rowClass = 'weather' + suffix;
+                return <li key={idx} className={styles[hourStyle]}>
                   <div className={styles.icon}>
                     <i className={iconClass}></i>
                   </div>
