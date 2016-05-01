@@ -31,8 +31,8 @@ export class TransportationPage extends React.Component {
               <th>Line</th>
               <th>Track</th>
               <th>Arriving</th>
-              <th>Last stop</th>
               <th>Destination</th>
+              <th>Last seen</th>
             </tr>
           </thead>
           <tbody>
@@ -42,14 +42,15 @@ export class TransportationPage extends React.Component {
                 <td>{data.track}</td>
                 <td className={data.late > 0 ? styles.late: ''}>
                   {data.cancelled ? 'cancelled!' : ''}&nbsp;
+                  <span className={styles.arrival}>{moment(data.arrival).locale('fi').format('LT')}</span>
                   {
                   data.late > 0 ?
-                    moment(data.arrival).locale('fi').format('LT') + ' -> ' + moment(data.estimate).locale('fi').format('LT') :
-                    moment(data.arrival).locale('fi').format('LT')
+                    ' -> ' + moment(data.estimate).locale('fi').format('LT') :
+                    ''
                   }
                 </td>
-                <td>{data.lastStop}&nbsp;<span className={styles.lastTime}>{data.lastStop ? '(' + moment(data.lastTime).locale('fi').format('LTS') + ')' : ''}</span></td>
                 <td>{data.destination}</td>
+                <td>{data.lastStop}&nbsp;<span className={styles.lastTime}>{data.lastStop ? '(' + moment(data.lastTime).locale('fi').format('LTS') + ')' : ''}</span></td>
               </tr>;
             }.bind(this))}
           </tbody>

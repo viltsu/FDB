@@ -4,8 +4,6 @@ import { TRAIN_URL } from '../../../settings.local.js';
 export const FETCH_TRAIN = 'FETCH_TRAIN';
 export const RECEIVE_TRAIN = 'RECEIVE_TRAIN';
 
-
-
 function requestTrains() {
   return {
     type: FETCH_TRAIN
@@ -18,6 +16,8 @@ function receiveTrains(data) {
     trains: data
   }
 }
+
+console.log(TRAIN_URL);
 
 export function fetchTrains() {
   
